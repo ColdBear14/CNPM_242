@@ -8,9 +8,9 @@ const bookingRoutes = require('./routes/booking');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/view/index.html');
-// });
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/view/index.html');
+});
 
 app.use('/public', express.static('public'));
 app.use('/api', bookingRoutes);

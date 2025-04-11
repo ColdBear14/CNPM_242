@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+const authRoutes = require('./routes/authRoutes')
 const bookingRoutes = require('./routes/booking');
 
 app.use(express.json());
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/public', express.static('public'));
+app.use('/api/auth', authRoutes);
 app.use('/api', bookingRoutes);
 
 app.listen(port, () => {

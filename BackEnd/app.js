@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
-const authRoutes = require('./routes/authRoutes')
 const bookingRoutes = require('./routes/booking');
 const authRoutes = require('./routes/Auth');
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; // Thêm useEffect
 import './App.css';
-import logo from './hcmut.png';
+import logo from './assets/hcmut.png';
 function App() {
   const [page, setPage] = useState("home");
   const [selectedRoom, setSelectedRoom] = useState(null);

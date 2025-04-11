@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"; // Thêm useEffect
 import './App.css';
 import logo from './assets/hcmut.png';
+import axios from 'axios';
+
 function App() {
   const [page, setPage] = useState("home");
   const [selectedRoom, setSelectedRoom] = useState(null);
@@ -46,21 +48,46 @@ useEffect(() => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email === "khanh@gmail.com" && password === "123456") {
-      alert("Đăng nhập thành công!");
-
-      if (document.getElementById("remember").checked) {
-        localStorage.setItem("rememberedEmail", email);
-        localStorage.setItem("rememberedPassword", password);
-      } else {
-        localStorage.removeItem("rememberedEmail");
-        localStorage.removeItem("rememberedPassword");
-      }
-
-      setPage("main"); 
-    } else {
-      alert("Email hoặc mật khẩu không đúng!");
+    const request = {
+      email: email,
+      password: password
     }
+    
+    axios.post(`http://127.0.0.1:8000/api/auth/login`, request, 
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then(response => {
+        console.log(`Login successful with response: ${response}`);
+        setPage("main");
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred during login');
+      });
+
+    
+    // e.preventDefault();
+
+    // if (email === "khanh@gmail.com" && password === "123456") {
+    //   alert("Đăng nhập thành công!");
+
+    //   if (document.getElementById("remember").checked) {
+    //     localStorage.setItem("rememberedEmail", email);
+    //     localStorage.setItem("rememberedPassword", password);
+    //   } else {
+    //     localStorage.removeItem("rememberedEmail");
+    //     localStorage.removeItem("rememberedPassword");
+    //   }
+
+    //   setPage("main"); 
+    // } else {
+    //   alert("Email hoặc mật khẩu không đúng!");
+    // }
   };
 
   return (

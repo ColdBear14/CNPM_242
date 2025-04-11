@@ -1,26 +1,72 @@
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
+const bcrypt = require('bcrypt');
+const usersDBPath = path.join(__dirname, '../storeage/users.json');
 
-exports.register = (req, res) => {
-    
-};
-
-exports.login = (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Username and password are required' });
+const readUsers = () => {
+    try {
+        const data = fs.readFileSync(usersDBPath, 'utf8');
+        return JSON.parse(data);
+    } catch (err) {
+        return [];
     }
-    const filePath = path.join(__dirname, '../storeage/user.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading user.json:', err.message);
-            return res.status(500).json({ error: 'Failed to load user data' });
-        }
-        const users = JSON.parse(data);
-        const user = users.find(u => u.email === email && u.password === password);
-        if (!user) {
-            return res.status(401).json({ error: 'Invalid email or password' });
-        }
-        res.status(200).json({ message: 'Login successful' });
-    });
 };
+
+const saveUsers = (users) => {
+    fs.writeFileSync(usersDBPath, JSON.stringify(users, null, 2));
+};
+
+const registerUser = async (req, res) => {
+    const { username, email, password } = req.body;
+    
+    try {
+        const users = readUsers();
+
+        const userExists = users.some(user => user.email === email);
+        if (userExists) {
+            return res.status(400).send('Email đã tồn tại');
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = {
+            id: Date.now().toString(),
+            username,
+            email,
+            password: hashedPassword,
+            createdAt: new Date().toISOString()
+        };
+
+        users.push(newUser);
+        saveUsers(users);
+
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).send('Lỗi server');
+    }
+};
+
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    
+    try {
+        const users = readUsers();
+        const user = users.find(user => user.email === email);
+
+        if (!user) {
+            return res.status(401).send('Email không tồn tại');
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).send('Mật khẩu không đúng');
+        }
+        req.session.userId = user.id;
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).send('Lỗi server');
+    }
+};
+
+module.exports = { registerUser, loginUser };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
 
 const Register = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
@@ -16,10 +17,27 @@ const Register = ({ setIsAuthenticated }) => {
       alert('Mật khẩu xác nhận không khớp!');
       return;
     }
-    setIsAuthenticated(true);
-    // localStorage.setItem('isAuthenticated', JSON.stringify(true)); // Không cần vì useEffect trong App.jsx đã xử lý
-    alert('Đăng ký thành công! Bạn đã được đăng nhập.');
-    navigate('/space');
+    const request = {
+      username: username,
+      password: password
+    }
+    axios.post(`http://127.0.0.1:8000/api/auth/register`, request, 
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      console.log(`Register successful with response: ${response}`);
+      setIsAuthenticated(true);
+      navigate('/space');
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred during register');
+    });
   };
 
   return (

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import axios from 'axios'; 
+
 const Login = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -8,13 +10,34 @@ const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username === 'admin' && password === 'password') {
-      setIsAuthenticated(true);
-      // localStorage.setItem('isAuthenticated', JSON.stringify(true)); // Không cần vì useEffect trong App.jsx đã xử lý
-      navigate('/space');
-    } else {
-      alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+    const request = {
+      username: username,
+      password: password
     }
+    axios.post(`http://127.0.0.1:8000/api/auth/login`, request, 
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      console.log(`Login successful with response: ${response}`);
+      setIsAuthenticated(true);
+      navigate('/space');
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred during login');
+    });
+    // if (username === 'admin' && password === 'password') {
+    //   setIsAuthenticated(true);
+    //   // localStorage.setItem('isAuthenticated', JSON.stringify(true)); // Không cần vì useEffect trong App.jsx đã xử lý
+    //   navigate('/space');
+    // } else {
+    //   alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+    // }
   };
 
   return (
@@ -41,14 +64,14 @@ const Login = ({ setIsAuthenticated }) => {
             placeholder="Nhập mật khẩu"
           />
         </div>
-        <div className="remember-me">
+        {/* <div className="remember-me">
           <input
             type="checkbox"
             checked={rememberMe}
             onChange={() => setRememberMe(!rememberMe)}
           />
           <label>Ghi nhớ đăng nhập</label>
-        </div>
+        </div> */}
         <button className="login-button" onClick={handleLogin}>
           Đăng nhập
         </button>

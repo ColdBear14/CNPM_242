@@ -1,6 +1,10 @@
 [
-    {
-        "email": "admin@hcmut.edu.vn",
-        "password": "admin"
-    }
+  {
+    "username": "admin@hcmut.edu.vn",
+    "password": "admin"
+  },
+  {
+    "username": "admin123@hcmut.edu.vn",
+    "password": "admin"
+  }
 ]

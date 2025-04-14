@@ -1,63 +1,72 @@
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require('bcrypt');
+const usersDBPath = path.join(__dirname, '../storeage/users.json');
 
-const usersDBPath = path.join(__dirname, '../storeage/user.json');
+const readUsers = () => {
+    try {
+        const data = fs.readFileSync(usersDBPath, 'utf8');
+        return JSON.parse(data);
+    } catch (err) {
+        return [];
+    }
+};
 
-exports.register = (req, res) => {
-    const { username, password } = req.body;
+const saveUsers = (users) => {
+    fs.writeFileSync(usersDBPath, JSON.stringify(users, null, 2));
+};
 
-    fs.readFile(usersDBPath, 'utf8', (err, data) => {
-        if (err && err.code !== 'ENOENT') {
-            console.error('Error reading users data:', err);
-            return res.status(500).json({ message: 'Internal server error' });
-        }
+const registerUser = async (req, res) => {
+    const { username, email, password } = req.body;
+    
+    try {
+        const users = readUsers();
 
-        let users = [];
-        if (data) {
-            users = JSON.parse(data);
-        }
-
-        const userExists = users.find(user => user.username === username);
+        const userExists = users.some(user => user.email === email);
         if (userExists) {
-            return res.status(400).json({ message: 'Username already exists' });
+            return res.status(400).send('Email đã tồn tại');
         }
 
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = {
+            id: Date.now().toString(),
+            username,
+            email,
+            password: hashedPassword,
+            createdAt: new Date().toISOString()
+        };
 
-        users.push({ username, password });
+        users.push(newUser);
+        saveUsers(users);
 
-        fs.writeFile(usersDBPath, JSON.stringify(users, null, 2), 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing users data:', err);
-                return res.status(500).json({ message: 'Internal server error' });
-            }
-            return res.status(201).json({ message: 'User registered successfully' });
-        });
-    });
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).send('Lỗi server');
+    }
 };
 
-exports.login = (req, res) => {
-    const { username, password } = req.body;
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
     
-    fs.readFile(usersDBPath, 'utf8', (err, data) => {
-        if (err) {
-        console.error('Error reading users data:', err);
-        return res.status(500).json({ message: 'Internal server error' });
-        }
-    
-        const users = JSON.parse(data);
-        const user = users.find(user => user.username === username);
-    
+    try {
+        const users = readUsers();
+        const user = users.find(user => user.email === email);
+
         if (!user) {
-        return res.status(401).json({ message: 'Invalid username or password 1' });
+            return res.status(401).send('Email không tồn tại');
         }
-        
-        const isMatch = password === user.password;
-    
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid username or password 2' });
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).send('Mật khẩu không đúng');
         }
-    
-        // Successful login
-        return res.status(200).json({ message: 'Login successful' });
-    });
+        req.session.userId = user.id;
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).send('Lỗi server');
+    }
 };
+
+module.exports = { registerUser, loginUser };

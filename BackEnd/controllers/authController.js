@@ -1,66 +1,80 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
+const bcrypt = require('bcrypt');
 
 const usersDBPath = path.join(__dirname, '../storeage/user.json');
+const salt = 10;
 
-exports.register = (req, res) => {
-    const { username, password } = req.body;
-
-    fs.readFile(usersDBPath, 'utf8', (err, data) => {
-        if (err && err.code !== 'ENOENT') {
-            console.error('Error reading users data:', err);
-            return res.status(500).json({ message: 'Internal server error' });
-        }
-
-        let users = [];
-        if (data) {
-            users = JSON.parse(data);
-        }
-
-        const userExists = users.find(user => user.username === username);
-        if (userExists) {
-            return res.status(400).json({ message: 'Username already exists' });
-        }
-
-
-        users.push({ username, password });
-
-        fs.writeFile(usersDBPath, JSON.stringify(users, null, 2), 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing users data:', err);
-                return res.status(500).json({ message: 'Internal server error' });
-            }
-
-            // Successful registration
-            return res.status(201).json({ message: 'User registered successfully' });
-        });
-    });
+const readUsers = async () => {
+    try {
+        const data = await fs.readFile(usersDBPath, 'utf8');
+        return JSON.parse(data);
+      } catch (err) {
+        if (err.code === 'ENOENT') return [];
+        throw err;
+      }
+};
+const writeUsers = async (users) => {
+    await fs.writeFile(usersDBPath, JSON.stringify(users, null, 2), 'utf-8');
 };
 
-exports.login = (req, res) => {
-    const { username, password } = req.body;
-    
-    // Read the users data from the JSON file
-    fs.readFile(usersDBPath, 'utf8', (err, data) => {
-        if (err) {
-        console.error('Error reading users data:', err);
-        return res.status(500).json({ message: 'Internal server error' });
+const registerUser = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        
+        const users = await readUsers();
+        const existingUser = users.find(user => user.username === username);
+        
+        if (existingUser) {
+          return res.status(409).json({ message: 'Tên đăng nhập đã tồn tại' });
         }
     
-        const users = JSON.parse(data);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const newUser = {
+          username,
+          password: hashedPassword,
+          createdAt: new Date().toISOString()
+        };
+    
+        users.push(newUser);
+        await writeUsers(users);
+        
+        res.status(201).json({ 
+          message: 'Đăng ký thành công',
+          user: { username: newUser.username, createdAt: newUser.createdAt }
+        });
+        
+    } catch (err) {
+        console.error('Registration error:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const loginUser = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const users = await readUsers();
         const user = users.find(user => user.username === username);
     
         if (!user) {
-        return res.status(401).json({ message: 'Invalid username or password 1' });
+            return res.status(401).json({ message: 'Tên đăng nhập không tồn tại' });
         }
+    
+        const passwordMatch = await bcrypt.compare(password, user.password);
         
-        const isMatch = password === user.password; // Replace with your password hashing logic
-    
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid username or password 2' });
+        if (!passwordMatch) {
+            return res.status(401).json({ message: 'Mật khẩu không chính xác' });
         }
     
-        // Successful login
-        return res.status(200).json({ message: 'Login successful' });
-    });
+        res.status(200).json({
+          message: 'Login successful',
+          user: { username: user.username, createdAt: user.createdAt }
+        });
+    
+    } catch (err) {
+        console.error('Login error:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 };
+
+module.exports = {registerUser, loginUser}

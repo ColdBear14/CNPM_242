@@ -30,8 +30,6 @@ exports.register = (req, res) => {
                 console.error('Error writing users data:', err);
                 return res.status(500).json({ message: 'Internal server error' });
             }
-
-            // Successful registration
             return res.status(201).json({ message: 'User registered successfully' });
         });
     });
@@ -40,7 +38,6 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
     const { username, password } = req.body;
     
-    // Read the users data from the JSON file
     fs.readFile(usersDBPath, 'utf8', (err, data) => {
         if (err) {
         console.error('Error reading users data:', err);
@@ -54,7 +51,7 @@ exports.login = (req, res) => {
         return res.status(401).json({ message: 'Invalid username or password 1' });
         }
         
-        const isMatch = password === user.password; // Replace with your password hashing logic
+        const isMatch = password === user.password;
     
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid username or password 2' });

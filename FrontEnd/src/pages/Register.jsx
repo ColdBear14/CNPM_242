@@ -32,6 +32,8 @@ const Register = ({ setIsAuthenticated }) => {
     .then(response => {
       console.log(`Register successful with response: ${response}`);
       setIsAuthenticated(true);
+      const { data } = response;
+      alert(data.message);
       navigate('/space');
     })
     .catch(error => {

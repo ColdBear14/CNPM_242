@@ -67,7 +67,7 @@ const loginUser = async (req, res) => {
         }
     
         res.status(200).json({
-          message: 'Login successful',
+          message: 'Đăng nhập thành công',
           user: { username: user.username, createdAt: user.createdAt }
         });
     

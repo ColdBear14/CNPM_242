@@ -1,38 +1,17 @@
 [
   {
-    "username": "admin@hcmut.edu.vn",
-    "password": "admin"
-  },
-  {
-    "username": "admin123@hcmut.edu.vn",
-    "password": "admin"
-  },
-  {
-    "username": "admin1234@hcmut.edu.vn",
-    "password": "admin"
-  },
-  {
-    "username": "admin12345@hcmut.edu.vn",
-    "password": "admin"
+    "username": "Egoist4444@hcmut.edu.vn",
+    "password": "$2b$10$9H.A9okvJ8DdUop4gPYtQOG0wUl9jPq7dNkGRfVMST0W/VqmJO6Nm",
+    "createdAt": "2025-04-15T07:43:29.760Z"
   },
   {
     "username": "Egoist@hcmut.edu.vn",
-    "password": "$2b$10$wmA5sD1hsW8v53dFShskO.50wMMlPcYWZ3So0vQHB8bX4ds9qg1fK",
-    "createdAt": "2025-04-14T13:50:34.438Z"
+    "password": "$2b$10$sfQIAWoC8lRKWaR8vCazqu3D1bDSYyCB4MQ8HNn1M/ZGRe5ttGdJG",
+    "createdAt": "2025-04-15T07:46:50.111Z"
   },
   {
-    "username": "Egoist1@hcmut.edu.vn",
-    "password": "$2b$10$JppNB3c5MtssSwp2UW.ddOd48pUJcV5fT8dTocODhyZZQYNwGd3Um",
-    "createdAt": "2025-04-14T16:43:17.271Z"
-  },
-  {
-    "username": "Egoist12@hcmut.edu.vn",
-    "password": "$2b$10$PTTNRLTEiu2Y/L4/b6UH1eNbXvi2s5URjEIiDv5.wPKUWyYqhFMfy",
-    "createdAt": "2025-04-14T16:58:04.236Z"
-  },
-  {
-    "username": "Egoist4444@hcmut.edu.vn",
-    "password": "$2b$10$wXgqHVs0OEelL05ceL9Rw.w.vrZHv9oUpJDHM/6OE//cus3KjPXeW",
-    "createdAt": "2025-04-14T17:13:11.890Z"
+    "username": "Egoisttroll@hcmut.edu.vn",
+    "password": "$2b$10$ORj6JRjEclpwxEIjWoxI2uh5S/KL9GUgzyGr9ggG7zUM/Uuo7CWiq",
+    "createdAt": "2025-04-15T07:57:25.932Z"
   }
 ]

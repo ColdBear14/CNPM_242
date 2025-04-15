@@ -29,6 +29,8 @@ const Login = ({ setIsAuthenticated }) => {
     .then(response => {
       console.log(`Login successful with response: ${response}`);
       setIsAuthenticated(true);
+      const { data } = response;
+      alert(data.message);
       navigate('/space');
     })
     .catch(error => {

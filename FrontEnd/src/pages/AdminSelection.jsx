@@ -1,0 +1,25 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import SpaceCard from '../components/SpaceCard';
+
+const AdminSelection = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="background">
+      <span className="help-box">Lịch sử</span>
+      <div className="space-selection-container">
+        <h2 className="space-title">Chọn không gian học tập</h2>
+        <div className="space-options">
+          <SpaceCard icon="👤" label="Phòng cá nhân" onClick={() => navigate('/search')} />
+          <SpaceCard icon="👥" label="Phòng nhóm" onClick={() => navigate('/search')} />
+          <SpaceCard icon="📄" label="Phòng họp" onClick={() => navigate('/search')} />
+          <SpaceCard icon="📄" label="Báo cáo" onClick={() => navigate('/search')} />
+          <SpaceCard icon="📄" label="Lịch sử" onClick={() => navigate('/search')} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminSelection;

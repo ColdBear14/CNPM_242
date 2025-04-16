@@ -8,9 +8,11 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import SpaceSelection from './pages/SpaceSelection';
+import AdminSelection from './pages/AdminSelection';
 import SearchSpace from './pages/SearchSpace';
 import BookingConfirmation from './pages/BookingConfirmation';
 import './assets/App.css';
+import AdminLogin from './pages/AdminLogin';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -32,6 +34,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/user-selection" element={<UserSelection />} />
+            <Route path="/adminlogin" element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
             <Route
@@ -47,6 +50,14 @@ const App = () => {
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <SpaceSelection />
+                </ProtectedRoute>
+              }
+            />
+                        <Route
+              path="/adminselection"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <AdminSelection />
                 </ProtectedRoute>
               }
             />

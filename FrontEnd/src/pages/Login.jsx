@@ -34,7 +34,6 @@ const Login = ({ setIsAuthenticated }) => {
       navigate('/space');
     })
     .catch(error => {
-      // Hy bếu
       if (error.response) {
         const { data } = error.response;
         alert(data.message || 'Đăng nhập thất bại'); 

@@ -16,6 +16,9 @@ const Home = () => {
             Không gian học tập thông minh cho mọi nhu cầu - từ cá nhân đến nhóm
           </p>
           <div className="hero-buttons">
+          <button className="hero-button primary" onClick={() => navigate('/register')}>
+              Đăng ký
+            </button>
             <button className="hero-button primary" onClick={() => navigate('/user-selection')}>
               Đăng nhập
             </button>

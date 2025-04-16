@@ -37,10 +37,9 @@ const Register = ({ setIsAuthenticated }) => {
       navigate('/space');
     })
     .catch(error => {
-      // Hy bếu
       if (error.response) {
         const { data } = error.response;
-        alert(data.message || 'Đăng nhập thất bại'); 
+        alert(data.message || 'Đăng ký thất bại'); 
       } else {
         alert('Lỗi kết nối đến server');
       }

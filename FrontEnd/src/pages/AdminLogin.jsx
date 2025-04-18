@@ -18,7 +18,7 @@ const AdminLogin = ({ setIsAuthenticated }) => {
       username: username,
       password: password
     }
-    axios.post(`http://127.0.0.1:8000/api/auth/login`, request, 
+    axios.post(`http://127.0.0.1:8000/api/auth/loginadmin`, request, 
       {
         withCredentials: true,
         headers: {

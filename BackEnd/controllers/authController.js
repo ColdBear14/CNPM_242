@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const bcrypt = require('bcrypt');
 
 const usersDBPath = path.join(__dirname, '../storeage/user.json');
+const adminDBPath = path.join(__dirname, '../storeage/admin.json');
 const salt = 10;
 
 const readUsers = async () => {
@@ -13,6 +14,15 @@ const readUsers = async () => {
         if (err.code === 'ENOENT') return [];
         throw err;
       }
+};
+const readAdmin = async () => {
+  try {
+      const data = await fs.readFile(adminDBPath, 'utf8');
+      return JSON.parse(data);
+    } catch (err) {
+      if (err.code === 'ENOENT') return [];
+      throw err;
+    }
 };
 const writeUsers = async (users) => {
     await fs.writeFile(usersDBPath, JSON.stringify(users, null, 2), 'utf-8');
@@ -76,5 +86,31 @@ const loginUser = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+const loginAdmin = async (req, res) => {
+  try {
+      const { username, password } = req.body;
+      const users = await readAdmin();
+      const admin = users.find(admin => admin.username === username);
+  
+      if (!admin) {
+          return res.status(401).json({ message: 'Vui lòng nhập đúng tài khoản admin' });
+      }
+  
+      const passwordMatch = await bcrypt.compare(password, admin.password);
+      
+      if (!passwordMatch) {
+          return res.status(401).json({ message: 'Mật khẩu không chính xác' });
+      }
+  
+      res.status(200).json({
+        message: 'Đăng nhập thành công',
+        user: { username: admin.username, createdAt: admin.createdAt }
+      });
+  
+  } catch (err) {
+      console.error('Login error:', err);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
-module.exports = {registerUser, loginUser}
+module.exports = {registerUser, loginUser, loginAdmin}

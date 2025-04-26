@@ -7,7 +7,6 @@ const SpaceSelection = () => {
 
   return (
     <div className="background">
-      <span className="help-box">Lịch sử</span>
       <div className="space-selection-container">
         <h2 className="space-title">Chọn không gian học tập</h2>
         <div className="space-options">

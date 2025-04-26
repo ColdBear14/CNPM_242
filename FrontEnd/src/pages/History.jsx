@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RoomCard from '../components/RoomCard';
 
-const SearchSpace = () => {
+const History = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const rooms = [
@@ -17,19 +17,19 @@ const SearchSpace = () => {
       room.room.includes(searchTerm)
   );
 
-  const handleRoomSelect = (room) => {
-    navigate('/booking', { state: { room } });
+  const handleHistorySelect = (room) => {
+    navigate('/historydetail', { state: { room } });
   };
 
   return (
     <div className="background">
       <div className="search-space-container">
-        <h2 className="search-title">Tìm phòng học</h2>
+        <h2 className="search-title">Lịch sử</h2>
         <div className="search-container">
           <input
             type="text"
             className="search-input"
-            placeholder="Tìm kiếm phòng (VD: BK.B1, 103...)"
+            placeholder="Tìm kiếm lịch sử"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -40,7 +40,7 @@ const SearchSpace = () => {
               <RoomCard
                 key={index}
                 room={room}
-                onClick={() => handleRoomSelect(room)}
+                onClick={() => handleHistorySelect(room)}
               />
             ))
           ) : (
@@ -52,4 +52,4 @@ const SearchSpace = () => {
   );
 };
 
-export default SearchSpace;
+export default History;

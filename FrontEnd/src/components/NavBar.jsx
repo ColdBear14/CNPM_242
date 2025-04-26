@@ -49,6 +49,12 @@ const NavBar = ({ isAuthenticated, setIsAuthenticated }) => {
         <ul className="navbar-links right">
           {isAuthenticated ? (
             <li>
+            <Link
+              to="/history"
+              className={`nav-link ${location.pathname === '/history' ? 'active' : ''}`}
+            >
+              Lịch sử
+            </Link>
               <button className="nav-link" onClick={handleLogout}>
                 Đăng xuất
               </button>

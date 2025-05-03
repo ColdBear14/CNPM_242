@@ -1,88 +1,82 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const RoomDetail = () => {
-  const [name, setName] = useState('');
-  const [mssv, setMssv] = useState('');
-  const [currentDate, setCurrentDate] = useState('');
-  const [selectedFeatures, setSelectedFeatures] = useState({
-    light: false,
-    fan: false,
-    wifi: false,
-    board: false,
-    power: false,
-  });
+const HistoryDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const room = location.state?.room;
+  const room = location.state?.room; // Lấy dữ liệu phòng từ state
 
-  useEffect(() => {
-    const now = new Date();
-    setCurrentDate(now.toLocaleDateString('vi-VN'));
-  }, []);
+  // Kiểm tra nếu không có dữ liệu phòng
+  if (!room) {
+    return (
+      <div>
+        Không có phòng nào được chọn! Quay lại{' '}
+        <button onClick={() => navigate('/history')}>Lịch sử</button>
+      </div>
+    );
+  }
 
-  const handleConfirm = () => {
-    if (!name || !mssv) {
-      alert('Vui lòng nhập đầy đủ thông tin!');
-      return;
-    }
-    alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}`);
-    navigate('/space');
+  const featureIcons = {
+    light: '💡',
+    fan: '🌀',
+    wifi: '📶',
+    board: '📱',
+    power: '⚡',
   };
 
-  const toggleFeature = (feature) => {
-    setSelectedFeatures((prev) => ({ ...prev, [feature]: !prev[feature] }));
+  const featureLabels = {
+    light: 'Light',
+    fan: 'Fan',
+    wifi: 'WIFI',
+    board: 'Board',
+    power: 'Power',
   };
-
-  if (!room) return <div>Không có phòng nào được chọn! Quay lại <button onClick={() => navigate('/search')}>Tìm phòng</button></div>;
 
   return (
     <div className="background">
-      <div className="booking-confirmation-container">
-        <h2 className="booking-title">Không gian</h2>
-        <div className="booking-box">
-          <p><strong>Court:</strong> {room.court} | <strong>Floor:</strong> {room.floor} | <strong>Room:</strong> {room.room}</p>
-          <p><strong>Ngày:</strong> {currentDate}</p>
-          <p><strong>Thời gian sử dụng:</strong> 180 phút</p>
-          <div className="room-features">
-            <button
-              className={`feature-btn ${selectedFeatures.light ? 'selected' : ''}`}
-              onClick={() => toggleFeature('light')}
-            >
-              <span>💡</span> Light
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.fan ? 'selected' : ''}`}
-              onClick={() => toggleFeature('fan')}
-            >
-              <span>🌀</span> Fan
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.wifi ? 'selected' : ''}`}
-              onClick={() => toggleFeature('wifi')}
-            >
-              <span>📶</span> WIFI
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.board ? 'selected' : ''}`}
-              onClick={() => toggleFeature('board')}
-            >
-              <span>📱</span> Board
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.power ? 'selected' : ''}`}
-              onClick={() => toggleFeature('power')}
-            >
-              <span>⚡</span> Power
-            </button>
-          </div>
-          <button className="confirm-button" onClick={handleConfirm}>
-            Xác nhận
-          </button>
+      <div className="history-detail-container">
+        <h2 className="history-detail-title">Chi tiết lịch sử đặt phòng</h2>
+        <div className="history-detail-box">
+          <p>
+            <strong>Name:</strong> {room.Name}
+          </p>
+          <p>
+            <strong>MSSV:</strong> {room.MSSV}
+          </p>
+          <p>
+            <strong>Court:</strong> {room.Court}
+          </p>
+          <p>
+            <strong>Floor:</strong> {room.Floor}
+          </p>
+          <p>
+            <strong>Room:</strong> {room.Room}
+          </p>
+          <p>
+            <strong>Start Time:</strong> {new Date(room.StartTime).toLocaleString()}
+          </p>
+          <p>
+            <strong>End Time:</strong> {new Date(room.EndTime).toLocaleString()}
+          </p>
+          <p>
+            <strong>Features:</strong>{' '}
+            {room.Features
+              ? Object.entries(room.Features).map(([feature, isSelected]) =>
+                  isSelected ? (
+                    <button key={feature} className="feature-btn selected">
+                      <span>{featureIcons[feature]}</span> {featureLabels[feature]}
+                    </button>
+                  ) : null
+                )
+              : 'Không có'}
+          </p>
         </div>
+        <button className="back-button" onClick={() => navigate('/history')}>
+          Quay lại
+        </button>
       </div>
     </div>
   );
 };
 
-export default RoomDetail;
+export default HistoryDetail;

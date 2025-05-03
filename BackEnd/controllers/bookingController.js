@@ -2,9 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 let bookings = [];
+const filePathUserSpace = path.join(__dirname, '../storeage/userSpace.json');
+const filePathSpace = path.join(__dirname, '../storeage/space.json');
+
 
 exports.bookSpace = (req, res) => {
-  const { spaceId, name, startTime, endTime, features } = req.body;
+  const { spaceId, name, mssv, startTime, endTime, features } = req.body;
 
 
   if (!spaceId || !name || !startTime || !endTime) {
@@ -17,18 +20,17 @@ exports.bookSpace = (req, res) => {
     }
   
     const bookedSpace = {
+      Name: name,
+      MSSV: mssv,
       id: updatedSpace.id,
       Court: updatedSpace.Court,
       Floor: updatedSpace.Floor,
       Room: updatedSpace.Room,
       StartTime: startTime,
       EndTime: endTime,
-      Name: name,
-      features: features
+      Features: features
     };
-  
-    console.log('Calling addSpaceToUserSpace with:', bookedSpace);
-  
+    
     addSpaceToUserSpace(bookedSpace, (userSpaceErr) => {
       if (userSpaceErr) {
         return res.status(500).json(userSpaceErr);
@@ -54,8 +56,7 @@ exports.getBookings = (req, res) => {
 };
 
 exports.getSpaces = (req, res) => {
-  const filePath = path.join(__dirname, '../storeage/space.json');
-  fs.readFile(filePath, 'utf8', (err, data) => {
+  fs.readFile(filePathSpace, 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading space.json:', err.message);
       return res.status(500).json({ error: 'Failed to load space data' });
@@ -130,7 +131,6 @@ exports.cancelBooking = (req, res) => {
 };
 
 const updateSpaceAvailability = (spaceId, isAvailable, callback) => {
-  const filePathSpace = path.join(__dirname, '../storeage/space.json');
 
   fs.readFile(filePathSpace, 'utf8', (err, data) => {
     if (err) {
@@ -165,7 +165,6 @@ const updateSpaceAvailability = (spaceId, isAvailable, callback) => {
 
 
 const addSpaceToUserSpace = (space, callback) => {
-  const filePathUserSpace = path.join(__dirname, '../storeage/userSpace.json');
 
   fs.readFile(filePathUserSpace, 'utf8', (err, data) => {
     let userSpaces = { spaces: [] };

@@ -1,14 +1,15 @@
 {
   "spaces": [
     {
+      "Name": "Nguyễn Xuân Hy",
+      "MSSV": "2211409",
       "id": 1,
       "Court": "BK.B1",
       "Floor": "1",
       "Room": 103,
-      "StartTime": "2025-05-03T14:45:39.964Z",
-      "EndTime": "2025-05-03T17:45:39.964Z",
-      "Name": "Nguyễn Xuân Hy",
-      "features": {
+      "StartTime": "2025-05-03T15:47:27.855Z",
+      "EndTime": "2025-05-03T18:17:27.855Z",
+      "Features": {
         "light": true,
         "fan": true,
         "wifi": true,

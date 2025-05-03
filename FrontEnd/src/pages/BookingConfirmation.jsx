@@ -5,6 +5,8 @@ const BookingConfirmation = () => {
   const [name, setName] = useState('');
   const [mssv, setMssv] = useState('');
   const [currentDate, setCurrentDate] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [selectedFeatures, setSelectedFeatures] = useState({
     light: false,
     fan: false,
@@ -12,6 +14,7 @@ const BookingConfirmation = () => {
     board: false,
     power: false,
   });
+  
   const navigate = useNavigate();
   const location = useLocation();
   const room = location.state?.room;
@@ -21,13 +24,45 @@ const BookingConfirmation = () => {
     setCurrentDate(now.toLocaleDateString('vi-VN'));
   }, []);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (!name || !mssv) {
       alert('Vui lòng nhập đầy đủ thông tin!');
       return;
     }
-    alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}`);
-    navigate('/space');
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const bookingData = {
+        name,
+        mssv,
+        spaceId: room.id,
+        time: new Date().toISOString(),
+        features: selectedFeatures
+      };
+
+      const response = await fetch('http://192.168.0.106:8000/api/booking/book', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Đặt phòng không thành công');
+      }
+
+      const result = await response.json();
+      alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}`);
+      navigate('/space');
+    } catch (err) {
+      setError(err.message);
+      alert(`Lỗi khi đặt phòng: ${err.message}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const toggleFeature = (feature) => {
@@ -62,40 +97,45 @@ const BookingConfirmation = () => {
           <p><strong>Court:</strong> {room.court} | <strong>Floor:</strong> {room.floor} | <strong>Room:</strong> {room.room}</p>
           <p><strong>Ngày:</strong> {currentDate}</p>
           <p><strong>Thời gian sử dụng:</strong> 180 phút</p>
+          
           <div className="room-features">
-            <button
-              className={`feature-btn ${selectedFeatures.light ? 'selected' : ''}`}
-              onClick={() => toggleFeature('light')}
-            >
-              <span>💡</span> Light
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.fan ? 'selected' : ''}`}
-              onClick={() => toggleFeature('fan')}
-            >
-              <span>🌀</span> Fan
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.wifi ? 'selected' : ''}`}
-              onClick={() => toggleFeature('wifi')}
-            >
-              <span>📶</span> WIFI
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.board ? 'selected' : ''}`}
-              onClick={() => toggleFeature('board')}
-            >
-              <span>📱</span> Board
-            </button>
-            <button
-              className={`feature-btn ${selectedFeatures.power ? 'selected' : ''}`}
-              onClick={() => toggleFeature('power')}
-            >
-              <span>⚡</span> Power
-            </button>
+            {Object.entries(selectedFeatures).map(([feature, isSelected]) => {
+              const icons = {
+                light: '💡',
+                fan: '🌀',
+                wifi: '📶',
+                board: '📱',
+                power: '⚡'
+              };
+              
+              const labels = {
+                light: 'Light',
+                fan: 'Fan',
+                wifi: 'WIFI',
+                board: 'Board',
+                power: 'Power'
+              };
+              
+              return (
+                <button
+                  key={feature}
+                  className={`feature-btn ${isSelected ? 'selected' : ''}`}
+                  onClick={() => toggleFeature(feature)}
+                >
+                  <span>{icons[feature]}</span> {labels[feature]}
+                </button>
+              );
+            })}
           </div>
-          <button className="confirm-button" onClick={handleConfirm}>
-            Xác nhận
+          
+          {error && <p className="error-message">{error}</p>}
+          
+          <button 
+            className="confirm-button" 
+            onClick={handleConfirm}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Đang xử lý...' : 'Xác nhận'}
           </button>
         </div>
       </div>

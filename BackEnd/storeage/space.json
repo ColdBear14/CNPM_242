@@ -1,50 +1,74 @@
-[
-  {
-    "id": 1,
-    "name": "Space 1",
-    "description": "This is space 1",
-    "location": "Location 1",
-    "capacity": 100,
-    "available": true
-  },
-  {
-    "id": 2,
-    "name": "Space 2",
-    "description": "This is space 2",
-    "location": "Location 2",
-    "capacity": 200,
-    "available": true
-  },
-  {
-    "id": 3,
-    "name": "Space 3",
-    "description": "This is space 3",
-    "location": "Location 3",
-    "capacity": 300,
-    "available": true
-  },
-  {
-    "id": 4,
-    "name": "Space 4",
-    "description": "This is space 4",
-    "location": "Location 4",
-    "capacity": 400,
-    "available": true
-  },
-  {
-    "id": 5,
-    "name": "Space 5",
-    "description": "This is space 5",
-    "location": "Location 5",
-    "capacity": 500,
-    "available": true
-  },
-  {
-    "id": 6,
-    "name": "Space 6",
-    "description": "This is space 6",
-    "location": "Location 6",
-    "capacity": 600,
-    "available": true
-  }
-]
+{
+  "spaces": [
+    {
+      "id": 1,
+      "Court": "BK.B1",
+      "Floor": "1",
+      "Room": 103,
+      "Available": true
+    },
+    {
+      "id": 2,
+      "Court": "BK.B1",
+      "Floor": "2",
+      "Room": 203,
+      "Available": true
+    },
+    {
+      "id": 3,
+      "Court": "BK.B1",
+      "Floor": "3",
+      "Room": 303,
+      "Available": true
+    },
+    {
+      "id": 4,
+      "Court": "BK.B2",
+      "Floor": "1",
+      "Room": 103,
+      "Available": true
+    },
+    {
+      "id": 5,
+      "Court": "BK.B2",
+      "Floor": "2",
+      "Room": 203,
+      "Available": true
+    },
+    {
+      "id": 6,
+      "Court": "BK.B2",
+      "Floor": "3",
+      "Room": 303,
+      "Available": true
+    },
+    {
+      "id": 7,
+      "Court": "BK.B3",
+      "Floor": "1",
+      "Room": 103,
+      "Available": true
+    },
+    {
+      "id": 8,
+      "Court": "BK.B3",
+      "Floor": "2",
+      "Room": 203,
+      "Available": true
+    },
+    {
+      "id": 9,
+      "Court": "BK.B3",
+      "Floor": "3",
+      "Room": 303,
+      "Available": true
+    },
+    {
+      "id": 10,
+      "Court": "BK.B1",
+      "Floor": "4",
+      "Room": 403,
+      "Available": false
+    }
+  ]
+}

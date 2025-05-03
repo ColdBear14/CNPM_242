@@ -14,7 +14,7 @@ const Login = ({ setIsAuthenticated }) => {
       username: username,
       password: password
     }
-    axios.post(`http://127.0.0.1:8000/api/auth/login`, request, 
+    axios.post(`http://192.168.0.106:8000/api/auth/login`, request, 
       {
         withCredentials: true,
         headers: {
@@ -29,7 +29,7 @@ const Login = ({ setIsAuthenticated }) => {
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('An error occurred during login');
+      alert('Wrong username or password. Please try again!');
     });
     // if (username === 'admin' && password === 'password') {
     //   setIsAuthenticated(true);

@@ -1,85 +1,146 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; 
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const Register = ({ setIsAuthenticated }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+const BookingConfirmation = () => {
+  const [name, setName] = useState('');
+  const [mssv, setMssv] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [selectedFeatures, setSelectedFeatures] = useState({
+    light: false,
+    fan: false,
+    wifi: false,
+    board: false,
+    power: false,
+  });
+  
   const navigate = useNavigate();
+  const location = useLocation();
+  const room = location.state?.room;
 
-  const handleRegister = () => {
-    if (!username || !password || !confirmPassword) {
+  useEffect(() => {
+    const now = new Date();
+    setCurrentDate(now.toLocaleDateString('vi-VN'));
+  }, []);
+
+  const handleConfirm = async () => {
+    if (!name || !mssv) {
       alert('Vui lòng nhập đầy đủ thông tin!');
       return;
     }
-    if (password !== confirmPassword) {
-      alert('Mật khẩu xác nhận không khớp!');
-      return;
-    }
-    const request = {
-      username: username,
-      password: password
-    }
-    axios.post(`http://127.0.0.1:8000/api/auth/register`, request, 
-      {
-        withCredentials: true,
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const bookingData = {
+        name,
+        mssv,
+        spaceId: room.id,
+        time: new Date().toISOString(),
+        features: selectedFeatures
+      };
+
+      const response = await fetch('http://192.168.0.106:8000/bookings', {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Đặt phòng không thành công');
       }
-    )
-    .then(response => {
-      console.log(`Register successful with response: ${response}`);
-      setIsAuthenticated(true);
+
+      const result = await response.json();
+      alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}`);
       navigate('/space');
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('An error occurred during register');
-    });
+    } catch (err) {
+      setError(err.message);
+      alert(`Lỗi khi đặt phòng: ${err.message}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const toggleFeature = (feature) => {
+    setSelectedFeatures((prev) => ({ ...prev, [feature]: !prev[feature] }));
+  };
+
+  if (!room) return <div>Không có phòng nào được chọn! Quay lại <button onClick={() => navigate('/search')}>Tìm phòng</button></div>;
 
   return (
     <div className="background">
-      <div className="register-box">
-        <h2 className="register-title">Đăng ký</h2>
-        <div className="input-group">
-          <label>Tên đăng nhập:</label>
-          <input
-            type="text"
-            className="register-input"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Nhập tên đăng nhập"
-          />
+      <div className="booking-confirmation-container">
+        <h2 className="booking-title">Xác nhận đặt phòng</h2>
+        <div className="booking-box">
+          <div className="input-group">
+            <label>Tên:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Nhập tên của bạn"
+            />
+          </div>
+          <div className="input-group">
+            <label>MSSV:</label>
+            <input
+              type="text"
+              value={mssv}
+              onChange={(e) => setMssv(e.target.value)}
+              placeholder="Nhập MSSV"
+            />
+          </div>
+          <p><strong>Court:</strong> {room.court} | <strong>Floor:</strong> {room.floor} | <strong>Room:</strong> {room.room}</p>
+          <p><strong>Ngày:</strong> {currentDate}</p>
+          <p><strong>Thời gian sử dụng:</strong> 180 phút</p>
+          
+          <div className="room-features">
+            {Object.entries(selectedFeatures).map(([feature, isSelected]) => {
+              const icons = {
+                light: '💡',
+                fan: '🌀',
+                wifi: '📶',
+                board: '📱',
+                power: '⚡'
+              };
+              
+              const labels = {
+                light: 'Light',
+                fan: 'Fan',
+                wifi: 'WIFI',
+                board: 'Board',
+                power: 'Power'
+              };
+              
+              return (
+                <button
+                  key={feature}
+                  className={`feature-btn ${isSelected ? 'selected' : ''}`}
+                  onClick={() => toggleFeature(feature)}
+                >
+                  <span>{icons[feature]}</span> {labels[feature]}
+                </button>
+              );
+            })}
+          </div>
+          
+          {error && <p className="error-message">{error}</p>}
+          
+          <button 
+            className="confirm-button" 
+            onClick={handleConfirm}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Đang xử lý...' : 'Xác nhận'}
+          </button>
         </div>
-        <div className="input-group">
-          <label>Mật khẩu:</label>
-          <input
-            type="password"
-            className="register-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Nhập mật khẩu"
-          />
-        </div>
-        <div className="input-group">
-          <label>Xác nhận mật khẩu:</label>
-          <input
-            type="password"
-            className="register-input"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Xác nhận mật khẩu"
-          />
-        </div>
-        <button className="register-button" onClick={handleRegister}>
-          Đăng ký
-        </button>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default BookingConfirmation;

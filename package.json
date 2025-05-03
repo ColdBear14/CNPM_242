@@ -18,5 +18,9 @@
   "keywords": [
     "1"
   ],
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
 }

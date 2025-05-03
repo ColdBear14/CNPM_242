@@ -5,7 +5,7 @@ const usersDBPath = path.join(__dirname, '../storeage/user.json');
 
 exports.register = (req, res) => {
     const { username, password } = req.body;
-
+    console.log(req.body)
     fs.readFile(usersDBPath, 'utf8', (err, data) => {
         if (err && err.code !== 'ENOENT') {
             console.error('Error reading users data:', err);
@@ -39,6 +39,7 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
     const { username, password } = req.body;
+    console.log(username, password)
     
     // Read the users data from the JSON file
     fs.readFile(usersDBPath, 'utf8', (err, data) => {

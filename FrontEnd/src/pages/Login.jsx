@@ -14,7 +14,7 @@ const Login = ({ setIsAuthenticated }) => {
       username: username,
       password: password
     }
-    axios.post(`http://192.168.0.106:8000/api/auth/login`, request, 
+    axios.post(`http://localhost:8000/api/auth/login`, request, 
       {
         withCredentials: true,
         headers: {

@@ -7,7 +7,7 @@ const SpaceSelection = () => {
 
   const handleClick = async (type) => {
     try {
-      const res = await fetch(`http://192.168.0.106:8000/spaces/type/${type}`);
+      const res = await fetch(`http://localhost:8000/spaces/type/${type}`);
       const json = await res.json();
 
       navigate('/search', { state: { rooms: json.data, type } });

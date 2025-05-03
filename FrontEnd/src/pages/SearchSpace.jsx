@@ -50,6 +50,9 @@ const SearchSpace = () => {
             <p className="no-results">Không tìm thấy phòng phù hợp.</p>
           )}
         </div>
+        <button className="back-button" onClick={() => navigate('/space')}>
+          Quay lại
+        </button>
       </div>
     </div>
   );

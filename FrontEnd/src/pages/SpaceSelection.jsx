@@ -25,6 +25,9 @@ const SpaceSelection = () => {
           <SpaceCard icon="👥" label="Phòng nhóm" onClick={() => handleClick('group')} />
           <SpaceCard icon="📄" label="Phòng họp" onClick={() => handleClick('meeting')} />
         </div>
+        <button className="back-button" onClick={() => navigate('/main')}>
+          Quay lại
+        </button>
       </div>
     </div>
   );

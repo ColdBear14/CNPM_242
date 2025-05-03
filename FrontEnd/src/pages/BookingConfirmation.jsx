@@ -149,6 +149,9 @@ const BookingConfirmation = () => {
             {isLoading ? 'Đang xử lý...' : 'Xác nhận'}
           </button>
         </div>
+        <button className="back-button" onClick={() => navigate('/search')}>
+          Quay lại
+        </button>
       </div>
     </div>
   );

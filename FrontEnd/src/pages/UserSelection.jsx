@@ -9,7 +9,7 @@ const UserSelection = () => {
       <div className="user-selection-container">
         <h2 className="selection-title">Smart Study Space</h2>
         <p className="selection-subtitle">Hệ thống không gian học tập thông minh</p>
-        <button className="selection-button" onClick={() => navigate('/login')}>
+        <button className="selection-button" onClick={() => navigate('/adminlogin')}>
           Nhân viên
         </button>
         <button className="selection-button" onClick={() => navigate('/login')}>

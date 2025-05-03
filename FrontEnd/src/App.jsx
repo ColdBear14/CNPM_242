@@ -8,9 +8,16 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import SpaceSelection from './pages/SpaceSelection';
+import AdminSelection from './pages/manager/AdminSelection';
 import SearchSpace from './pages/SearchSpace';
 import BookingConfirmation from './pages/BookingConfirmation';
 import './assets/App.css';
+import AdminLogin from './pages/manager/AdminLogin';
+import History from './pages/History';
+import HistoryDetail from './pages/HistoryDetail';
+import SpaceSetting from './pages/SpaceSetting';
+
+
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -32,40 +39,18 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/user-selection" element={<UserSelection />} />
+            <Route path="/adminlogin" element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
-            <Route
-              path="/main"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <MainPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/space"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <SpaceSelection />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <SearchSpace />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/booking"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <BookingConfirmation />
-                </ProtectedRoute>
-              }
-            />
+
+            <Route path="/main" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <MainPage /> </ProtectedRoute>}/>
+            <Route path="/space" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <SpaceSelection /> </ProtectedRoute>}/>
+            <Route path="/adminselection" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <AdminSelection /> </ProtectedRoute>}/>
+            <Route path="/search" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <SearchSpace /> </ProtectedRoute>}/>
+            <Route path="/history" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <History /></ProtectedRoute>}/>
+            <Route path="/booking" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <BookingConfirmation /></ProtectedRoute>}/>
+            <Route path="/historydetail" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <HistoryDetail /></ProtectedRoute>}/>
+            <Route path="/setting" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <SpaceSetting /></ProtectedRoute>}/>
           </Routes>
         </div>
       </div>

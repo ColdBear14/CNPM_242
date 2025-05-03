@@ -7,7 +7,6 @@ const MainPage = () => {
 
   return (
     <div className="background">
-      <span className="help-box">Lịch sử</span>
       <div className="main-container">
         <h2 className="main-title">Chào mừng đến với SStudyS</h2>
         <div className="space-options">

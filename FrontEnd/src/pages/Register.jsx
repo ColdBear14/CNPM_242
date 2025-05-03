@@ -29,42 +29,41 @@ const BookingConfirmation = () => {
       alert('Vui lòng nhập đầy đủ thông tin!');
       return;
     }
-
+  
     setIsLoading(true);
     setError(null);
-
+  
     try {
       const bookingData = {
         name,
         mssv,
         spaceId: room.id,
         time: new Date().toISOString(),
-        features: selectedFeatures
+        features: selectedFeatures,
       };
-
-      const response = await fetch('http://192.168.0.106:8000/bookings', {
+  
+      const response = await fetch('http://127.0.0.1:8000/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(bookingData),
       });
-
+  
       if (!response.ok) {
-        throw new Error('Đặt phòng không thành công');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Đăng ký thất bại');
       }
-
-      const result = await response.json();
-      alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}`);
+  
+      const data = await response.json();
+      alert(data.message);
       navigate('/space');
-    } catch (err) {
-      setError(err.message);
-      alert(`Lỗi khi đặt phòng: ${err.message}`);
+    } catch (error) {
+      alert(error.message || 'Lỗi kết nối đến server');
     } finally {
       setIsLoading(false);
     }
   };
-
   const toggleFeature = (feature) => {
     setSelectedFeatures((prev) => ({ ...prev, [feature]: !prev[feature] }));
   };

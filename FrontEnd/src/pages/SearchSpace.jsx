@@ -23,7 +23,6 @@ const SearchSpace = () => {
 
   return (
     <div className="background">
-      <span className="help-box">Lịch sử</span>
       <div className="search-space-container">
         <h2 className="search-title">Tìm phòng học</h2>
         <div className="search-container">

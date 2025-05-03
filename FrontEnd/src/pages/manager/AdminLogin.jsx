@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios'; 
 
-const Login = ({ setIsAuthenticated }) => {
+const AdminLogin = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Login = ({ setIsAuthenticated }) => {
       username: username,
       password: password
     }
-    axios.post(`http://127.0.0.1:8000/api/auth/loginuser`, request, 
+    axios.post(`http://127.0.0.1:8000/api/auth/loginadmin`, request, 
       {
         withCredentials: true,
         headers: {
@@ -30,7 +30,7 @@ const Login = ({ setIsAuthenticated }) => {
       setIsAuthenticated(true);
       const { data } = response;
       alert(data.message);
-      navigate('/space');
+      navigate('/adminselection');
     })
     .catch(error => {
       if (error.response) {
@@ -52,7 +52,7 @@ const Login = ({ setIsAuthenticated }) => {
   return (
     <div className="background">
       <div className="login-box">
-        <h2 className="login-title">Đăng nhập</h2>
+        <h2 className="login-title">Đăng nhập nhân viên</h2>
         <div className="input-group">
           <label>Tên đăng nhập:</label>
           <input
@@ -89,4 +89,4 @@ const Login = ({ setIsAuthenticated }) => {
   );
 };
 
-export default Login;
+export default AdminLogin;

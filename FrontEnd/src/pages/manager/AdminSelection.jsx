@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SpaceCard from '../components/SpaceCard';
+import SpaceCard from '../../components/SpaceCard';
 
 const AdminSelection = () => {
   const navigate = useNavigate();

@@ -515,9 +515,9 @@ body {
 /* Login */
 .login-box {
   background: rgba(255, 255, 255, 0.9);
-  padding: 3rem;
+  padding: 6rem;
   border-radius: 20px;
-  max-width: 500px;
+  max-width: 1000px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -525,20 +525,9 @@ body {
 .login-title {
   font-size: 2.5rem;
   color: #03151f;
+  margin-top: auto;
   margin-bottom: 2rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.input-group {
-  margin-bottom: 1.5rem;
-}
-
-.input-group label {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #03151f;
-  margin-bottom: 0.5rem;
 }
 
 .login-input {
@@ -555,6 +544,52 @@ body {
   outline: none;
   box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
 }
+
+.login-input-group{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-input-group label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #03151f;
+  margin-bottom: 0.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column; /* Sắp xếp nhãn và input theo chiều dọc */
+  margin-bottom: 1rem; /* Khoảng cách giữa các nhóm input */
+  text-align: center; /* Căn trái nội dung */
+}
+
+.input-group label {
+  font-size: 1.4rem; /* Tăng kích thước chữ của nhãn */
+  font-weight: bold; /* Làm nổi bật nhãn */
+  color: #03151f; /* Màu chữ tối hơn */
+  margin-bottom: 0.5rem; /* Khoảng cách giữa nhãn và input */
+}
+
+.input-group input {
+  width: 60%; /* Input chiếm toàn bộ chiều rộng của container */
+  padding: 0.8rem; /* Tăng khoảng cách bên trong input */
+  border: 2px solid #ccc; /* Đường viền nhẹ */
+  border-radius: 8px; /* Bo góc input */
+  font-size: 1rem; /* Tăng kích thước chữ trong input */
+  margin: 0 auto;
+  background-color: #f9f9f9; /* Màu nền nhẹ nhàng */
+}
+
+.input-group input::placeholder {
+  color: #aaa; /* Màu placeholder nhẹ nhàng */
+  font-style: italic; /* Làm chữ placeholder nghiêng */
+}
+
+
 
 .remember-me {
   display: flex;
@@ -595,9 +630,9 @@ body {
 /* Register */
 .register-box {
   background: rgba(255, 255, 255, 0.9);
-  padding: 3rem;
+  padding: 6rem;
   border-radius: 20px;
-  max-width: 500px;
+  max-width: 1000px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -605,7 +640,8 @@ body {
 .register-title {
   font-size: 2.5rem;
   color: #03151f;
-  margin-bottom: 2rem;
+  margin-top: auto;
+  margin-bottom: 1.5rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -622,6 +658,21 @@ body {
   border-color: #00aaff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+}
+
+.register-input-group{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.register-input-group label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #03151f;
+  margin-bottom: 0.5rem;
 }
 
 .register-button {

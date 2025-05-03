@@ -17,7 +17,7 @@ const Login = ({ setIsAuthenticated }) => {
       username: username,
       password: password
     }
-    axios.post(`http://127.0.0.1:8000/api/auth/loginuser`, request, 
+    axios.post(`http://localhost:8000/api/auth/loginuser`, request, 
       {
         withCredentials: true,
         headers: {
@@ -30,7 +30,7 @@ const Login = ({ setIsAuthenticated }) => {
       setIsAuthenticated(true);
       const { data } = response;
       alert(data.message);
-      navigate('/space');
+      navigate('/main');
     })
     .catch(error => {
       if (error.response) {
@@ -53,7 +53,7 @@ const Login = ({ setIsAuthenticated }) => {
     <div className="background">
       <div className="login-box">
         <h2 className="login-title">Đăng nhập</h2>
-        <div className="input-group">
+        <div className="login-input-group">
           <label>Tên đăng nhập:</label>
           <input
             type="text"
@@ -63,7 +63,7 @@ const Login = ({ setIsAuthenticated }) => {
             placeholder="Nhập tên đăng nhập"
           />
         </div>
-        <div className="input-group">
+        <div className="login-input-group">
           <label>Mật khẩu:</label>
           <input
             type="password"

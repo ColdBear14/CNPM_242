@@ -1,0 +1,20 @@
+{
+  "spaces": [
+    {
+      "id": 1,
+      "Court": "BK.B1",
+      "Floor": "1",
+      "Room": 103,
+      "StartTime": "2025-05-03T14:45:39.964Z",
+      "EndTime": "2025-05-03T17:45:39.964Z",
+      "Name": "Nguyễn Xuân Hy",
+      "features": {
+        "light": true,
+        "fan": true,
+        "wifi": true,
+        "board": false,
+        "power": true
+      }
+    }
+  ]
+}

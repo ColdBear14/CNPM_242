@@ -14,6 +14,8 @@ const BookingConfirmation = () => {
     board: false,
     power: false,
   });
+  const [duration, setDuration] = useState('');
+
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,7 +27,7 @@ const BookingConfirmation = () => {
   }, []);
 
   const handleConfirm = async () => {
-    if (!name || !mssv) {
+    if (!name || !mssv || !duration) {
       alert('Vui lòng nhập đầy đủ thông tin!');
       return;
     }
@@ -38,11 +40,12 @@ const BookingConfirmation = () => {
         name,
         mssv,
         spaceId: room.id,
-        time: new Date().toISOString(),
+        startTime: new Date().toISOString(),
+        endTime: new Date(Date.now() + duration * 60 *1000).toISOString(), // 180 phút sau
         features: selectedFeatures
       };
 
-      const response = await fetch('http://192.168.0.106:8000/api/booking/book', {
+      const response = await fetch('http://localhost:8000/api/booking/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,8 +58,8 @@ const BookingConfirmation = () => {
       }
 
       const result = await response.json();
-      alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.room}`);
-      navigate('/space');
+      alert(`Đặt phòng thành công!\nTên: ${name}\nMSSV: ${mssv}\nPhòng: ${room.Room}`);
+      navigate('/main');
     } catch (err) {
       setError(err.message);
       alert(`Lỗi khi đặt phòng: ${err.message}`);
@@ -94,9 +97,17 @@ const BookingConfirmation = () => {
               placeholder="Nhập MSSV"
             />
           </div>
-          <p><strong>Court:</strong> {room.court} | <strong>Floor:</strong> {room.floor} | <strong>Room:</strong> {room.room}</p>
+          <p><strong>Court:</strong> {room.Court} | <strong>Floor:</strong> {room.Floor} | <strong>Room:</strong> {room.Room}</p>
           <p><strong>Ngày:</strong> {currentDate}</p>
-          <p><strong>Thời gian sử dụng:</strong> 180 phút</p>
+          <div className="input-group">
+            <label>Thời gian sử dụng (phút):</label>
+            <input
+              type="number"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              placeholder="Nhập thời gian sử dụng (phút)"
+            />
+          </div>
           
           <div className="room-features">
             {Object.entries(selectedFeatures).map(([feature, isSelected]) => {

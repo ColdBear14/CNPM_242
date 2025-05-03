@@ -37,7 +37,7 @@ const App = () => {
         <NavBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
         <div className="content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={isAuthenticated ? <MainPage /> : <Home />} />
             <Route path="/user-selection" element={<UserSelection />} />
             <Route path="/adminlogin" element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />

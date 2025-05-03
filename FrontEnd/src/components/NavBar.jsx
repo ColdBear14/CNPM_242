@@ -21,30 +21,41 @@ const NavBar = ({ isAuthenticated, setIsAuthenticated }) => {
       </div>
       <div className="navbar-content">
         <ul className="navbar-links left">
-          <li>
+        {isAuthenticated ? (
+            <li>
             <Link
-              to="/"
-              className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+              to="/main"
+              className={`nav-link ${location.pathname === '/main' ? 'active' : ''}`}
             >
               Trang chủ
             </Link>
-          </li>
-          <li>
             <Link
-              to="/space"
-              className={`nav-link ${location.pathname === '/space' ? 'active' : ''}`}
-            >
-              Không gian học
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/search"
-              className={`nav-link ${location.pathname === '/search' ? 'active' : ''}`}
-            >
-              Tìm phòng
-            </Link>
-          </li>
+                  to="/space"
+                  className={`nav-link ${location.pathname === '/space' ? 'active' : ''}`}
+                >
+                  Không gian học
+                </Link>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link
+                  to="/"
+                  className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+                >
+                  Đăng nhập
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/space"
+                  className={`nav-link ${location.pathname === '/space' ? 'active' : ''}`}
+                >
+                  Không gian học
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
         <ul className="navbar-links right">
           {isAuthenticated ? (

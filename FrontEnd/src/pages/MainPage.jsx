@@ -18,7 +18,7 @@ const MainPage = () => {
           <SpaceCard
             icon="💼"
             label="Setting"
-            onClick={() => navigate('/setting')}
+            onClick={() => navigate('/settingsearch')}
           />
         </div>
       </div>

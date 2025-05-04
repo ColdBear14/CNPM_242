@@ -28,6 +28,7 @@ exports.bookSpace = (req, res) => {
       Room: updatedSpace.Room,
       StartTime: startTime,
       EndTime: endTime,
+      State: "Close",
       Features: features
     };
     

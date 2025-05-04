@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const History = () => {
+const SpaceSettingSearch = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [roomHistory, setRoomHistory] = useState([]);
 
-  // Lấy dữ liệu từ API spaceHistory
   const getRoomHistory = () => {
     axios
       .get('http://localhost:8000/api/history/getHisory', {
@@ -17,11 +16,11 @@ const History = () => {
         },
       })
       .then((response) => {
-        console.log('Get room history successful:', response.data);
+        console.log('Get room  successful:', response.data);
         setRoomHistory(response.data || []); // Lưu dữ liệu vào state
       })
       .catch((error) => {
-        console.error('Error fetching room history:', error);
+        console.error('Error fetching room :', error);
         alert('Không thể tải lịch sử đặt chỗ.');
       });
   };
@@ -39,18 +38,18 @@ const History = () => {
 
   // Xử lý khi người dùng chọn một phòng
   const handleRoomSelect = (room) => {
-    navigate('/historydetail', { state: { id: room.id } });
+    navigate('/settingdetail', { state: { id: room.id } });
   };
 
   return (
     <div className="background">
       <div className="history-space-container">
-        <h2 className="history-title">Lịch sử</h2>
+        <h2 className="history-title">Quản lý không gian</h2>
         <div className="history-container">
           <input
             type="text"
             className="history-input"
-            placeholder="Tìm kiếm lịch sử đặt chỗ (VD: BK.B1, 103...)"
+            placeholder="Tìm kiếm không gian khả dụng(VD: BK.B1, 103...)"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -80,7 +79,7 @@ const History = () => {
               </div>
             ))
           ) : (
-            <p className="no-results">Không tìm thấy lịch sử.</p>
+            <p className="no-results">Không tìm thấy không gian.</p>
           )}
         </div>
       </div>
@@ -88,4 +87,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default SpaceSettingSearch;

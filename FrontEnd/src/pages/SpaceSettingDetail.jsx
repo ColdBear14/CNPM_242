@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-const HistoryDetail = () => {
+const SettingDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const roomId = location.state?.id; // Lấy ID từ state
   const [room, setRoom] = useState(null); // State để lưu thông tin phòng
   const [loading, setLoading] = useState(true); // State để hiển thị trạng thái loading
 
-  // Gọi API để lấy thông tin chi tiết
   useEffect(() => {
     if (!roomId) {
       alert('Không tìm thấy ID của phòng!');
-      navigate('/history');
+      navigate('/settingsearch');
       return;
     }
 
@@ -29,7 +28,7 @@ const HistoryDetail = () => {
       .catch((error) => {
         console.error('Error fetching room detail:', error);
         alert('Không thể tải thông tin chi tiết phòng.');
-        navigate('/history');
+        navigate('/settingsearch');
       });
   }, [roomId, navigate]);
 
@@ -43,7 +42,7 @@ const HistoryDetail = () => {
     return (
       <div>
         Không có phòng nào được chọn! Quay lại{' '}
-        <button onClick={() => navigate('/history')}>Lịch sử</button>
+        <button onClick={() => navigate('/settingsearch')}></button>
       </div>
     );
   }
@@ -64,10 +63,35 @@ const HistoryDetail = () => {
     power: 'Power',
   };
 
+  const toggleState = async () => {
+    try {
+        if (!room.id) {
+            alert('Không tìm thấy ID của phòng!');
+            return;
+          }
+      const updatedRoom = { ...room, State: room.State === "Open" ? "Close" : "Open" };
+      await axios.put('http://localhost:8000/api/history/updateState', {
+        id: room.id,
+        State: updatedRoom.State,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      // Cập nhật trạng thái trong giao diện
+      setRoom(updatedRoom);
+      alert('Cập nhật trạng thái thành công!');
+    } catch (error) {
+      console.error('Error updating state:', error);
+      alert('Không thể cập nhật trạng thái.');
+    }
+  };
+
   return (
     <div className="background">
       <div className="history-detail-container">
-        <h2 className="history-detail-title">Chi tiết lịch sử đặt phòng</h2>
+        <h2 className="history-detail-title">Chi tiết không gian</h2>
         <div className="history-detail-box">
           <p>
             <strong>Name:</strong> {room.Name}
@@ -90,9 +114,9 @@ const HistoryDetail = () => {
           <p>
             <strong>End Time:</strong> {new Date(room.EndTime).toLocaleString()}
           </p>
-          <p>
-            <strong>State:</strong> {room.State}
-          </p>
+          <button className="update-available-btn" onClick={toggleState}>
+          {room.State === "Open" ? 'Đóng' : 'Mở'}
+          </button>
           <p>
             <strong>Features:</strong>{' '}
             {room.Features
@@ -106,7 +130,7 @@ const HistoryDetail = () => {
               : 'Không có'}
           </p>
         </div>
-        <button className="back-button" onClick={() => navigate('/history')}>
+        <button className="back-button" onClick={() => navigate('/settingsearch')}>
           Quay lại
         </button>
       </div>
@@ -114,4 +138,4 @@ const HistoryDetail = () => {
   );
 };
 
-export default HistoryDetail;
+export default SettingDetail;

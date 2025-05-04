@@ -15,7 +15,8 @@ import './assets/App.css';
 import AdminLogin from './pages/manager/AdminLogin';
 import History from './pages/History';
 import HistoryDetail from './pages/HistoryDetail';
-import SpaceSetting from './pages/SpaceSetting';
+import SpaceSettingSearch from './pages/SpaceSettingSearch';
+import SpaceSettingDetail from './pages/SpaceSettingDetail';
 
 
 
@@ -50,7 +51,8 @@ const App = () => {
             <Route path="/history" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <History /></ProtectedRoute>}/>
             <Route path="/booking" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <BookingConfirmation /></ProtectedRoute>}/>
             <Route path="/historydetail" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <HistoryDetail /></ProtectedRoute>}/>
-            <Route path="/setting" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <SpaceSetting /></ProtectedRoute>}/>
+            <Route path="/settingsearch" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <SpaceSettingSearch /></ProtectedRoute>}/>
+            <Route path="/settingdetail" element={<ProtectedRoute isAuthenticated={isAuthenticated}> <SpaceSettingDetail /></ProtectedRoute>}/>
           </Routes>
         </div>
       </div>

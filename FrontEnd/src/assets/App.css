@@ -1046,3 +1046,20 @@ body {
   transform: scale(1.05);
   border-color: #28a745;
 }
+
+
+.update-available-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.update-available-btn:hover {
+  background-color: #0056b3;
+}

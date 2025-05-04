@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import QRCode from 'react-qr-code';
+
+
 
 const SettingDetail = () => {
   const navigate = useNavigate();
@@ -88,6 +91,13 @@ const SettingDetail = () => {
     }
   };
 
+  const qrData = JSON.stringify({
+    id: room.id,
+    Court: room.Court,
+    Floor: room.Floor,
+    Room: room.Room,
+  });
+
   return (
     <div className="background">
       <div className="history-detail-container">
@@ -114,6 +124,9 @@ const SettingDetail = () => {
           <p>
             <strong>End Time:</strong> {new Date(room.EndTime).toLocaleString()}
           </p>
+          <p>
+            <strong>State:</strong> {room.State}
+          </p>
           <button className="update-available-btn" onClick={toggleState}>
           {room.State === "Open" ? 'Đóng' : 'Mở'}
           </button>
@@ -129,6 +142,10 @@ const SettingDetail = () => {
                 )
               : 'Không có'}
           </p>
+            <div className="qr-code">
+              <h3>Mã QR cho không gian</h3>
+              <QRCode value={qrData} size={200} />
+            </div>
         </div>
         <button className="back-button" onClick={() => navigate('/settingsearch')}>
           Quay lại

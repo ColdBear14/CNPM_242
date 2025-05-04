@@ -1063,3 +1063,13 @@ body {
 .update-available-btn:hover {
   background-color: #0056b3;
 }
+
+.qr-code {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.qr-code h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}

@@ -3,5 +3,10 @@
     "username": "test",
     "password": "$2b$10$rWoLbol6e/W7EW9qqqGbz.bbH12AsuEiQIneIM/yXC9aopofN10tG",
     "createdAt": "2025-04-26T15:19:39.071Z"
+  },
+  {
+    "username": "hy",
+    "password": "$2b$10$p6rLisIoBBjpNsz1q8TdEOOPYiJLaKXRAyZSQpykKLTL8g6KXrsKu",
+    "createdAt": "2025-05-04T14:48:14.938Z"
   }
 ]

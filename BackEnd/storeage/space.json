@@ -12,7 +12,7 @@
       "Court": "BK.B1",
       "Floor": "2",
       "Room": 203,
-      "Available": true
+      "Available": false
     },
     {
       "id": 3,

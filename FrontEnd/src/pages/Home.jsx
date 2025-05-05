@@ -1,14 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-const singleRoom = 'https://via.placeholder.com/500x300?text=Phòng+Cá+Nhân';
-const groupRoom = 'https://via.placeholder.com/500x300?text=Phòng+Nhóm';
-const meetingRoom = 'https://via.placeholder.com/500x300?text=Phòng+Họp';
+import studySpace from '../assets/images/studySpace.jpg';
+import singleRoom from '../assets/images/singleRoom.jpg';
+import groupRoom from '../assets/images/groupRoom.jpg';
+import meetingRoom from '../assets/images/meetingRoom.jpg';
+// const studySpace = 'https://via.placeholder.com/500x300?text=Không+gian+học+tập';
+// const singleRoom = 'https://via.placeholder.com/500x300?text=Phòng+Cá+Nhân';
+// const groupRoom = 'https://via.placeholder.com/500x300?text=Phòng+Nhóm';
+// const meetingRoom = 'https://via.placeholder.com/500x300?text=Phòng+Họp';
+
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="home-wrapper">
+    <div className="home-wrapper"> 
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">Khám phá SStudyS</h1>
@@ -35,7 +41,7 @@ const Home = () => {
             SStudyS là hệ thống quản lý không gian học tập thông minh, giúp sinh viên, cán bộ và khách dễ dàng tìm kiếm và đặt chỗ các phòng học phù hợp.
           </p>
           <div className="about-image">
-            <img src={singleRoom} alt="Không gian học tập" />
+            <img src={studySpace} alt="Không gian học tập" />
           </div>
         </div>
       </section>

@@ -50,6 +50,7 @@ body {
   gap: 1rem;
   font-size: 1.8rem;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .navbar-logo {
@@ -72,6 +73,7 @@ body {
   margin: 0;
   padding: 0;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .navbar-links.left {
@@ -205,6 +207,7 @@ body {
   font-size: 3rem;
   color: #03151f;
   width: 100%;
+  /* text-align: center; */
 }
 
 .about-content p {
@@ -215,7 +218,7 @@ body {
 }
 
 .about-image img {
-  max-width: 500px;
+  max-width: 550px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -286,6 +289,7 @@ body {
   gap: 2.5rem;
   max-width: 1200px;
   margin: 0 auto;
+  justify-items: center;
 }
 
 .space-card {
@@ -303,19 +307,19 @@ body {
 
 .space-card img {
   width: 100%;
-  height: 220px;
+  height: 300px;
   object-fit: cover;
 }
 
 .space-card h3 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #03151f;
   margin: 1.5rem 0 0.5rem;
   padding: 0 1.5rem;
 }
 
 .space-card p {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #666;
   padding: 0 1.5rem 1.5rem;
 }

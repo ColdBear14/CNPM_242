@@ -20,7 +20,7 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 
 </div>
 
-# Project: A smart printing service for students at HCMUT
+# Project: Smart Study Space Management and Reservation System at HCMUT
 ## Team members
 
 | No. | Name             | Student ID | Email                          | Contact                                                                                                                                                                                                                     |

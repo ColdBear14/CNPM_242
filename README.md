@@ -10,9 +10,9 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 [![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HCMUT_official_logo.png/238px-HCMUT_official_logo.png)](https://www.hcmut.edu.vn/vi)
 <br />
 <br />
-<img src="https://img.shields.io/github/stars/Khai-vuong/Software-Engineering?color=white&logo=github">&emsp;<img src="https://img.shields.io/github/last-commit/Khai-vuong/Software-Engineering?color=blue">
+<img src="https://img.shields.io/github/stars/ColdBear14/CNPM_242?color=white&logo=github">&emsp;<img src="https://img.shields.io/github/last-commit/ColdBear14/CNPM_242?color=blue">
 <br />
-<img src="https://img.shields.io/github/languages/top/Khai-vuong/Software-Engineering?color=yellow&logo=python&logoColor=yellow">&emsp;<img src="https://img.shields.io/github/repo-size/Khai-vuong/Software-Engineering?color=orange&label=size&logo=git&logoColor=orange">
+<img src="https://img.shields.io/github/languages/top/ColdBear14/CNPM_242?color=yellow&logo=python&logoColor=yellow">&emsp;<img src="https://img.shields.io/github/repo-size/ColdBear14/CNPM_242?color=orange&label=size&logo=git&logoColor=orange">
 <br />
 **Software Engineering / Semester 241**
 <br/>

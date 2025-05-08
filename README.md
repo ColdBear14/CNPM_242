@@ -27,7 +27,7 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 | :-: | ---------------- | :--------: | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |  1  | Lưu Văn Huy |  2211199  | huy.luuegoist@hcmut.edu.vn |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git1]|
 |  2  | Trần Tuấn Kha |   2211418   | kha.trantuan@hcmut.edu.vn | [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git2]|
-|  3  | Lê Thành Đạt |   2210683   | dat.le2210683@hcmut.edu.vn |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git3]|
+|  3  |  Vũ Trọng Khánh |   2211541   | khanh.vutrong1809@hcmut.edu.vn |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git3]|
 |  4  | Phạm Anh Hùng |  2211346   | hung.phamdautinchi1@hcmut.edu.vn | [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git4]|
 |  5  | Nguyễn Xuân Hy |  2211409  | hy.nguyennopehy@hcmut.edu.vn |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git5]|
 |  6  | Nguyễn Hoàng Sơn  |  2212943   | son.nguyenhoang9452@hcmut.edu.vn  |  [<img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" align="left" width=20px style="margin-left:5px" />][git6]|
@@ -35,7 +35,7 @@ FACULTY OF COMPUTER SCIENCE AND ENGINEERING
 
 [git1]: https://github.com/Huy-Egoist
 [git2]: https://github.com/Kha-Tran22
-[git3]: https://github.com/thnhdt/
+[git3]: https://github.com/khanhvutrong1809
 [git4]: https://github.com/anh-hungg23
 [git5]:https://github.com/ColdBear14
 [git6]:https://github.com/Sonwoang

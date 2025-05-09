@@ -140,7 +140,7 @@ exports.updateState = (req, res) => {
   };
 
 
-  function updateAvailableInFile(filePath, id, Available, type = 'string', EndTime) {
+  function updateAvailableInFile(filePath, id, Available, type = 'string', EndTime, StartTime) {
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) return reject({ error: `Error reading file: ${filePath}` });
@@ -150,8 +150,11 @@ exports.updateState = (req, res) => {
           let spaces = Array.isArray(obj) ? obj : obj.spaces;
           if (!spaces) return reject({ error: 'Invalid file structure' });
   
-          const idx = spaces.findIndex(space => String(space.id) === String(id));
+          const idx = spaces.findIndex(
+            space => String(space.id) === String(id) && String(space.StartTime) === String(StartTime)
+          );
           if (idx === -1) return reject({ error: `Space not found in ${filePath}` });
+
   
           // Cập nhật cho userSpace.json: Available (string), EndTime (nếu có)
           if (filePath === filePathSpaceHistory) {
@@ -181,7 +184,7 @@ exports.updateState = (req, res) => {
   }
   
   exports.updateAvailable = async (req, res) => {
-    const { id, Available, EndTime } = req.body;
+    const { id, Available, StartTime, EndTime } = req.body;
   
     // Xác định giá trị boolean cho space.json
     let availableBool;
@@ -201,7 +204,7 @@ exports.updateState = (req, res) => {
       await updateAvailableInFile(filePathSpace, id, availableBool, 'boolean');
   
       // Update in userSpace.json với giá trị đảo ngược (string) và EndTime nếu có
-      const updatedUserSpace = await updateAvailableInFile(filePathSpaceHistory, id, inverseAvailableStr, 'string', EndTime);
+      const updatedUserSpace = await updateAvailableInFile(filePathSpaceHistory, id, inverseAvailableStr, 'string', EndTime , StartTime);
   
       res.status(200).json({
         message: 'Available updated: space.json (boolean), userSpace.json (string, inverse), EndTime updated if provided',

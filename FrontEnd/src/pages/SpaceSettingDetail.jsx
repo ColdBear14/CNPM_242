@@ -105,7 +105,6 @@ const SettingDetail = () => {
 
       const newEndTime = new Date().toISOString();
 
-
       const updatedRoom = { ...room,
             Available: room.Available === "True" ? "True" : "False",
             EndTime: newEndTime 
@@ -113,6 +112,7 @@ const SettingDetail = () => {
       await axios.put('http://localhost:8000/api/manage/updateAvailable', {
         id: room.id,
         Available: updatedRoom.Available,
+        StartTime: room.StartTime,
         EndTime: newEndTime
       }, {
         headers: {

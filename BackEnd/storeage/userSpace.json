@@ -2,13 +2,32 @@
   "spaces": [
     {
       "Name": "hy",
+      "MSSV": "1223",
+      "id": 1,
+      "Court": "BK.B1",
+      "Floor": "1",
+      "Room": 103,
+      "StartTime": "2025-05-09T02:39:45.629Z",
+      "EndTime": "2025-05-09T02:59:26.236Z",
+      "Available": "False",
+      "State": "Close",
+      "Features": {
+        "light": false,
+        "fan": false,
+        "wifi": false,
+        "board": false,
+        "power": false
+      }
+    },
+    {
+      "Name": "hy",
       "MSSV": "123",
       "id": 1,
       "Court": "BK.B1",
       "Floor": "1",
       "Room": 103,
-      "StartTime": "2025-05-09T02:30:25.262Z",
-      "EndTime": "2025-05-09T02:31:07.106Z",
+      "StartTime": "2025-05-09T02:59:37.992Z",
+      "EndTime": "2025-05-09T02:59:41.937Z",
       "Available": "False",
       "State": "Close",
       "Features": {

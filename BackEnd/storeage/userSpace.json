@@ -1,36 +1,19 @@
 {
   "spaces": [
     {
-      "Name": "Nguyễn Xuân Hy",
-      "MSSV": "2211409",
+      "Name": "hy",
+      "MSSV": "123",
       "id": 1,
       "Court": "BK.B1",
       "Floor": "1",
       "Room": 103,
-      "StartTime": "2025-05-04T14:48:57.574Z",
-      "EndTime": "2025-05-04T15:18:57.574Z",
-      "State": "Open",
-      "Features": {
-        "light": true,
-        "fan": true,
-        "wifi": true,
-        "board": false,
-        "power": true
-      }
-    },
-    {
-      "Name": "Nguyễn Xuân Hy",
-      "MSSV": "2211409",
-      "id": 2,
-      "Court": "BK.B1",
-      "Floor": "2",
-      "Room": 203,
-      "StartTime": "2025-05-04T14:51:27.307Z",
-      "EndTime": "2025-05-04T16:51:27.307Z",
+      "StartTime": "2025-05-09T02:30:25.262Z",
+      "EndTime": "2025-05-09T02:31:07.106Z",
+      "Available": "False",
       "State": "Close",
       "Features": {
         "light": false,
-        "fan": true,
+        "fan": false,
         "wifi": false,
         "board": false,
         "power": false

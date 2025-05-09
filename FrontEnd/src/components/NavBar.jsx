@@ -139,14 +139,14 @@ const NavBar = ({ isAuthenticated, setIsAuthenticated }) => {
               Không gian học
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               to="/search"
               className={`nav-link ${location.pathname === '/search' ? 'active' : ''}`}
             >
               Tìm phòng
             </Link>
-          </li>
+          </li> */}
         </ul>
         <ul className="navbar-links right">
           {isAuthenticated ? (

@@ -10,7 +10,7 @@ const History = () => {
   // Lấy dữ liệu từ API spaceHistory
   const getRoomHistory = () => {
     axios
-      .get('http://localhost:8000/api/history/getHisory', {
+      .get('http://localhost:8000/api/manage/getHisory', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',

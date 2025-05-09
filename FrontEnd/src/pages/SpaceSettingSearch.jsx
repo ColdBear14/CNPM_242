@@ -9,7 +9,7 @@ const SpaceSettingSearch = () => {
 
   const getRoomHistory = () => {
     axios
-      .get('http://localhost:8000/api/history/getHisory', {
+      .get('http://localhost:8000/api/manage/getAvailable', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ const SettingDetail = () => {
     }
 
     axios
-      .get(`http://localhost:8000/api/history/getDetail`, {
+      .get(`http://localhost:8000/api/manage/getDetail`, {
         params: {id : roomId},
       })
       .then((response) => {
@@ -73,7 +73,7 @@ const SettingDetail = () => {
             return;
           }
       const updatedRoom = { ...room, State: room.State === "Open" ? "Close" : "Open" };
-      await axios.put('http://localhost:8000/api/history/updateState', {
+      await axios.put('http://localhost:8000/api/manage/updateState', {
         id: room.id,
         State: updatedRoom.State,
       }, {
@@ -81,10 +81,47 @@ const SettingDetail = () => {
           'Content-Type': 'application/json',
         },
       });
+
   
       // Cập nhật trạng thái trong giao diện
       setRoom(updatedRoom);
       alert('Cập nhật trạng thái thành công!');
+    } catch (error) {
+      console.error('Error updating state:', error);
+      alert('Không thể cập nhật trạng thái.');
+    }
+  };
+
+  const toggleAvailable = async () => {
+    try {
+        if (!room.id) {
+            alert('Không tìm thấy ID của phòng!');
+            return;
+          }
+
+      // const now = new Date();
+      // const vietnamTime = new Date(now.getTime());
+      // const newEndTime = vietnamTime.toISOString();
+
+      const newEndTime = new Date().toISOString();
+
+
+      const updatedRoom = { ...room,
+            Available: room.Available === "True" ? "True" : "False",
+            EndTime: newEndTime 
+          };
+      await axios.put('http://localhost:8000/api/manage/updateAvailable', {
+        id: room.id,
+        Available: updatedRoom.Available,
+        EndTime: newEndTime
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setRoom(updatedRoom);
+      alert('Cập nhật trạng thái thành công!');
+      navigate('/settingsearch');
     } catch (error) {
       console.error('Error updating state:', error);
       alert('Không thể cập nhật trạng thái.');
@@ -124,6 +161,12 @@ const SettingDetail = () => {
           <p>
             <strong>End Time:</strong> {new Date(room.EndTime).toLocaleString()}
           </p>
+          <p>
+            <strong>Available:</strong> {room.Available}
+          </p>
+          <button className="update-available-btn" onClick={toggleAvailable}>
+          {room.Available === "True" ? 'Trả phòng' : 'Error'}
+          </button>
           <p>
             <strong>State:</strong> {room.State}
           </p>

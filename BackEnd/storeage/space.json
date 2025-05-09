@@ -5,14 +5,14 @@
       "Court": "BK.B1",
       "Floor": "1",
       "Room": 103,
-      "Available": false
+      "Available": true
     },
     {
       "id": 2,
       "Court": "BK.B1",
       "Floor": "2",
       "Room": 203,
-      "Available": false
+      "Available": true
     },
     {
       "id": 3,
@@ -68,7 +68,7 @@
       "Court": "BK.B1",
       "Floor": "4",
       "Room": 403,
-      "Available": false
+      "Available": true
     }
   ]
 }

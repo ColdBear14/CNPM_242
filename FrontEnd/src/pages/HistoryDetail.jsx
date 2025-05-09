@@ -18,7 +18,7 @@ const HistoryDetail = () => {
     }
 
     axios
-      .get(`http://localhost:8000/api/history/getDetail`, {
+      .get(`http://localhost:8000/api/manage/getHistoryDetail`, {
         params: {id : roomId},
       })
       .then((response) => {
@@ -89,6 +89,9 @@ const HistoryDetail = () => {
           </p>
           <p>
             <strong>End Time:</strong> {new Date(room.EndTime).toLocaleString()}
+          </p>
+          <p>
+            <strong>Available:</strong> {room.Available}
           </p>
           <p>
             <strong>State:</strong> {room.State}

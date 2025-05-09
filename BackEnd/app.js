@@ -6,7 +6,7 @@ const port = 8000;
 const bookingRoutes = require('./routes/booking');
 const authRoutes = require('./routes/Auth');
 const spaceRoutes = require('./routes/space_detail_router');
-const historyRoutes = require('./routes/History');
+const manageRoutes = require('./routes/SpaceManage');
 
 
 app.use(express.json());
@@ -19,7 +19,7 @@ app.use('/public', express.static('public'));
 app.use('/api/booking', bookingRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/spaces', spaceRoutes);
-app.use('/api/history', historyRoutes);
+app.use('/api/manage', manageRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

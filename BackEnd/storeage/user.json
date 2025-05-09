@@ -6,12 +6,7 @@
   },
   {
     "username": "hy",
-    "password": "$2b$10$p6rLisIoBBjpNsz1q8TdEOOPYiJLaKXRAyZSQpykKLTL8g6KXrsKu",
-    "createdAt": "2025-05-04T14:48:14.938Z"
-  },
-  {
-    "username": "admin",
-    "password": "$2b$10$Wqf2.mHsA82sLTj8HrVUbuyxyEbpu3g2gqi/a8eFeYTH9RkKhdepW",
-    "createdAt": "2025-05-05T05:50:06.024Z"
+    "password": "$2b$10$AKp5Igl8y6Ldblv5bjVpbO1ofLgmXe8VRKSMp1VTBd7gQQgu3vYVC",
+    "createdAt": "2025-05-09T03:05:48.007Z"
   }
 ]
